@@ -11,47 +11,38 @@
 
         <main>
 
-        <h1 class="titulos">Bienvenido <?= $_SESSION["datos_usuario_log"]["nombre"] ?></h1>
-            <form action="index.php" method="post" class="pagoFormulario">
-
+            <h1 class="titulos">Bienvenido <?= $_SESSION["datos_usuario_log"]["nombre"] ?></h1>
+            <form action="<?= PUBLIC_PATH ?>index.php?vista=vistaEditarUsuario" method="post" class="pagoFormulario">
                 <div class="contenedorCentrado">
                     <button type="submit" name="accion" value="editarDatos" class="pagoInput">
                         Editar datos personales
                     </button>
                 </div>
+            </form>
 
+            <form action="<?= PUBLIC_PATH ?>index.php?vista=vistaReservas" method="post" class="pagoFormulario">
                 <div class="contenedorCentrado">
-                    <button type="submit" name="accion" value="cambiarContrasena" class="pagoInput">
-                        Cambiar contraseña
+                    <button type="submit" name="accion" value="gestionarReservas" class="pagoInput">
+                        Gestionar mis reservas
                     </button>
                 </div>
+            </form>
 
-                <div class="contenedorCentrado">
-                    <button type="submit" name="accion" value="historialReservas" class="pagoInput">
-                        Historial de reservas
-                    </button>
-                </div>
-
+            <form action="index.php" method="post" class="pagoFormulario">
                 <div class="contenedorCentrado">
                     <button type="submit" name="btnCerrarSession" value="cerrarSesion" class="pagoInput cerrar">
                         Cerrar sesión
                     </button>
                 </div>
+            </form>
 
-                <div class="contenedorCentrado">
-                    <button type="submit" name="accion" value="darBaja" class="pagoInput cerrar">
-                        Darme de baja
-                    </button>
-                </div>
-
+            <form action="index.php" method="post" class="pagoFormulario">
                 <div class="contenedorCentrado">
                     <button type="submit" name="btnSalir" value="salir" class="botonConfirmarCuadrado">
                         Salir
                     </button>
                 </div>
-
             </form>
-
 
         </main>
 

@@ -86,14 +86,14 @@ if (isset($_POST["tabla_admin"])) {
             echo "<p>No hay datos en la tabla seleccionada.</p>";
         }
     }
+}
 
-    if (isset($_SESSION["mensaje_error"])) {
-        echo "<p class='error'>" . $_SESSION["mensaje_error"] . "</p>";
-        unset($_SESSION["mensaje_error"]);
-    }
-    if (isset($_SESSION["mensaje_info"])) {
-        echo "<p class='info'>" . $_SESSION["mensaje_info"] . "</p>";
-        unset($_SESSION["mensaje_info"]);
-    }
+if (isset($_SESSION["mensaje_error"])) {
+    echo "<p class='error'>" . $_SESSION["mensaje_error"] . "</p>";
+    unset($_SESSION["mensaje_error"]);
+}
+if (isset($_SESSION["mensaje_info"])) {
+    echo "<p class='info'>" . $_SESSION["mensaje_info"] . "</p>";
+    unset($_SESSION["mensaje_info"]);
 }
 ?>

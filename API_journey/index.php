@@ -25,6 +25,62 @@ $app->post('/login', function ($request) {
     echo json_encode(login($datos_login));
 });
 
+$app->get('/obtenerSedes', function () {
+    echo json_encode(obtenerSedes());
+});
+
+$app->get('/obtenerReservasCliente', function ($request) {
+
+    $test = validateToken();
+    if (is_array($test) && isset($test["usuario"])) {
+        $id_usuario = $test["usuario"]["id_usuario"];
+
+        $reservas = obtenerReservasCliente($id_usuario);
+
+        echo json_encode($reservas);
+    } else {
+        echo json_encode(["no_auth" => "No tienes permiso para acceder a este recurso"]);
+    }
+});
+
+$app->put('/actualizarReserva', function ($request) {
+    $test = validateToken();
+
+    if (is_array($test) && isset($test["usuario"])) {
+
+        $datos = [];
+        $datos[] = $request->getParam("id_reserva");
+        $datos[] = $request->getParam("fecha_inicio");
+        $datos[] = $request->getParam("fecha_fin");
+        $datos[] = $request->getParam("sede_recogida");
+        $datos[] = $request->getParam("sede_entrega");
+        echo json_encode(actualizarReserva($datos));
+    } else {
+        echo json_encode(["no_auth" => "No tienes permiso para acceder a este recurso"]);
+    }
+});
+
+$app->put('/actualizarUsuario', function ($request) {
+    $test = validateToken();
+
+    if (is_array($test) && isset($test["usuario"])) {
+
+        $datos = [
+            'id_usuario' => $request->getParam("id_usuario"),
+            'nombre'     => $request->getParam("nombre"),
+            'email'      => $request->getParam("email"),
+            'usuario'    => $request->getParam("usuario"),
+            'telefono'   => $request->getParam("telefono")
+        ];
+
+
+        echo json_encode(actualizarUsuario($datos));
+    } else {
+        echo json_encode(["no_auth" => "No tienes permiso para acceder a este recurso"]);
+    }
+});
+
+
 $app->post('/registro', function ($request) {
     $datos_registro[] = $request->getParam("usuario");
     $datos_registro[] = $request->getParam("nombreCompleto");
@@ -83,7 +139,9 @@ $app->post('/realizarReserva', function ($request) {
             $datos_insert[] = $request->getParam("ubicacion_devolucion");
             $datos_insert[] = $request->getParam("plan");
 
-            echo json_encode(realizarReserva($datos_insert));
+            $importe = $request->getParam("importe");
+
+            echo json_encode(realizarReserva($datos_insert, $importe));
         } else {
             echo json_encode($test);
         }
@@ -130,15 +188,43 @@ $app->delete('/eliminarVehiculo', function ($request) {
         echo json_encode(array("no_auth" => "No tienes permiso para usar el servicio"));
 });
 
+$app->put('/editarVehiculo', function ($request) {
+    $test = validateToken();
+    if (is_array($test)) {
+        if (isset($test["usuario"])) {
+            if ($test["usuario"]["tipo"] == "admin") {
+                // Obtener parámetros del cuerpo de la petición
+                $datos = $request->getParsedBody();
+                echo json_encode(editarVehiculo($datos));
+            } else {
+                echo json_encode(["no_auth" => "No tienes permiso para usar el servicio"]);
+            }
+        } else {
+            echo json_encode($test);
+        }
+    } else {
+        echo json_encode(["no_auth" => "No tienes permiso para usar el servicio"]);
+    }
+});
+
+$app->post('/insertarVehiculo', function ($request) {
+    $test = validateToken();
+    if (is_array($test)) {
+        if (isset($test["usuario"]) && $test["usuario"]["tipo"] == "admin") {
+            $datos = $request->getParsedBody();
+            echo json_encode(insertarVehiculo($datos));
+        } else {
+            echo json_encode(["no_auth" => "No tienes permiso para usar el servicio"]);
+        }
+    } else {
+        echo json_encode(["no_auth" => "No tienes permiso para usar el servicio"]);
+    }
+});
+
 $app->PUT('/seleccionarCoche', function ($request) {
     $datos_update[] = $request->getParam("seleccionado_por");
     $datos_update[] = $request->getParam("seleccionado_timestamp");
     $datos_update[] = $request->getParam("id_vehiculo");
     echo json_encode(seleccionarCoche($datos_update));
 });
-
-$app->get('/obtenerReservasCliente', function () {
-    echo json_encode(obtenerReservasCliente());
-});
-
 $app->run();

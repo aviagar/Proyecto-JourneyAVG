@@ -766,7 +766,7 @@ label.menu-toggle {
     border-radius: 0.2rem;
 }
 
-label.menu-toggle > span {
+label.menu-toggle>span {
     position: absolute;
     background: white;
     width: 1.5rem;
@@ -787,17 +787,17 @@ label.menu-toggle span:nth-child(3) {
     bottom: 0;
 }
 
-label.menu-toggle.activo > span:nth-child(1) {
+label.menu-toggle.activo>span:nth-child(1) {
     top: 0.6rem;
     transform: rotate(45deg);
     transition-delay: 0s, .025s;
 }
 
-label.menu-toggle.activo > span:nth-child(2) {
+label.menu-toggle.activo>span:nth-child(2) {
     background: none;
 }
 
-label.menu-toggle.activo > span:nth-child(3) {
+label.menu-toggle.activo>span:nth-child(3) {
     top: 0.6rem;
     transform: rotate(-45deg);
     transition-delay: 0s, .025s;
@@ -840,11 +840,11 @@ label.menu-toggle.activo > span:nth-child(3) {
     border-radius: 20px;
 }
 
-#divObjetivos{
+#divObjetivos {
     padding: 2rem;
 }
 
-.contenedor_not_found{
+.contenedor_not_found {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -854,14 +854,19 @@ label.menu-toggle.activo > span:nth-child(3) {
     margin-bottom: 2rem;
 }
 
-.contenedor_not_found *{
+.contenedor_not_found * {
     flex-basis: 100%;
     text-align: center;
 }
 
-.not_found{
+.not_found {
     width: 20rem;
     height: 20rem;
+}
+
+.centrado {
+    text-align: center;
+    margin-top: 4rem;
 }
 
 /* VERSION ESCRITORIO */
@@ -1024,6 +1029,23 @@ button.coche {
 
             p {
 
+                padding: 0.2rem 1.5rem;
+                border-radius: 15px;
+                background-color: white;
+                text-transform: capitalize;
+            }
+        }
+
+        .car-info-price {
+            margin-top: auto;
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1rem;
+
+            p {
+                align-self: flex-end;
                 padding: 0.2rem 1.5rem;
                 border-radius: 15px;
                 background-color: white;

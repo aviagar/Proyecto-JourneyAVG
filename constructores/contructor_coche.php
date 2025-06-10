@@ -89,9 +89,13 @@ $coches = $respuesta["coches"] ?? [];
                             <p><?= $coche["plazas"] ?></p>
                             <p><?= $coche["transmision"] ?></p>
                         </div>
+                        <div class="car-info-price">
+                            <p><?= $coche["precio"] ?></p>
+                        </div>
                     </div>
 
                 </button>
+                <input type="hidden" name="precio_coche" value="<?= $coche["precio"] ?>">
         <?php
             }
         endforeach; ?>

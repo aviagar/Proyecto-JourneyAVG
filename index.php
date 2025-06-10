@@ -11,7 +11,7 @@ session_set_cookie_params([
 session_name("Journey");
 session_start();
 require "src/funciones_CTES.php";
-define("PUBLIC_PATH", "/JOURNEY/public/");
+define("PUBLIC_PATH", "/");
 
 
 $vista = $_GET["vista"] ?? "inicio";
@@ -164,8 +164,42 @@ switch ($vista) {
             exit;
         }
 
+    case "vistaReservas":
+        if ((isset($_SESSION["token"]))) {
+            require "vistas/vistaReservas.php";
+            break;
+        } else {
+            header("Location: index.php?vista=inicio");
+            exit;
+        }
+
+    case "vistaActualizarReserva":
+        if ((isset($_SESSION["token"]))) {
+            require "vistas/vistaActualizarReserva.php";
+            break;
+        } else {
+            header("Location: index.php?vista=inicio");
+            exit;
+        }
+
+    case "confirmaActualizarReserva":
+        require "vistas/confirmaActualizarReserva.php";
+        break; 
+
+    case "vistaEditarUsuario":
+        if ((isset($_SESSION["token"]))) {
+            require "vistas/vistaEditarUsuario.php";
+            break;
+        } else {
+            header("Location: index.php?vista=inicio");
+            exit;
+        }
+
     case "inicio":
     default:
+    if (isset($_SESSION["actualizar_reserva"])) {
+        unset($_SESSION["actualizar_reserva"]);
+    }
         require "vistas/vistaInicio.php";
         break;
 }

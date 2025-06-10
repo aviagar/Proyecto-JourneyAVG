@@ -15,66 +15,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idDevolucion = $_POST["idSedeDevolucion"] ?? null;
 
 
-    $errores = [];
-
-    // Validaciones simples
-    if (!$ubicacionRecogida) {
-        $errores['ubicacionRecogida'] = "La ubicación de recogida es obligatoria.";
-    }
-
-    if (!$ubicacionDevolucion) {
-        $errores['ubicacionDevolucion'] = "La ubicación de devolución es obligatoria.";
-    }
-
-    if (!$fechaRecogida) {
-        $errores['fechaRecogida'] = "La fecha de recogida es obligatoria.";
-    }
-
-    if (!$horaRecogida) {
-        $errores['horaRecogida'] = "La hora de recogida es obligatoria.";
-    }
-
-    if (!$fechaDevolucion) {
-        $errores['fechaDevolucion'] = "La fecha de devolución es obligatoria.";
-    }
-
-    if (!$horaDevolucion) {
-        $errores['horaDevolucion'] = "La hora de devolución es obligatoria.";
-    }
-
-    // Ejemplo extra: validar que la devolución no sea antes que la recogida
-    if ($fechaRecogida && $fechaDevolucion && $horaRecogida && $horaDevolucion) {
-        $inicio = strtotime("$fechaRecogida $horaRecogida");
-        $fin = strtotime("$fechaDevolucion $horaDevolucion");
-        if ($fin < $inicio) {
-            $errores['fechaDevolucion'] = "La fecha y hora de devolución deben ser posteriores a la recogida.";
-        }
-    }
-
-    if (!empty($errores)) {
-        $_SESSION['errores_reserva'] = $errores;
-
-        // Guardar datos antiguos para rellenar el formulario
-        $_SESSION['periodo_reserva'] = [
-            'ubicacionRecogida' => $ubicacionRecogida,
-            'ubicacionDevolucion' => $ubicacionDevolucion,
-            'diaRecogida' => $fechaRecogida,
-            'horaRecogida' => $horaRecogida,
-            'diaDevolucion' => $fechaDevolucion,
-            'horaDevolucion' => $horaDevolucion
-        ];
-
-        header("Location: /JOURNEY/public/index.php?vista=inicio");
-        exit;
-    }
-
-
-
     if (!$idRecogida || !$idDevolucion) {
         $respuesta = consumir_servicios_REST(DIR_SERV . "/obtenerSedes", "GET");
         if (isset($respuesta["error"])) {
             $_SESSION["error"] = "Error al obtener sedes: " . $respuesta["error"];
-            header("Location: /JOURNEY/public/index.php?vista=inicio");
+            header("Location: index.php?vista=inicio");
             exit;
         }
 
@@ -100,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!$idDevolucion) {
                 $_SESSION["error_devolucion"] = "No se encontró la sede de devolución especificada.";
             }
-            header("Location: /JOURNEY/public/index.php?vista=inicio");
+            header("Location: index.php?vista=inicio");
             exit;
         }
     } else {
@@ -112,6 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Combinar fechas y horas en formato datetime
     $datetimeRecogida = date("Y-m-d H:i:s", strtotime($fechaRecogida . ' ' . $horaRecogida));
     $datetimeDevolucion = date("Y-m-d H:i:s", strtotime($fechaDevolucion . ' ' . $horaDevolucion));
+
+    $fecha1 = new DateTime($datetimeRecogida);
+    $fecha2 = new DateTime($datetimeDevolucion);
+    $diferencia = $fecha1->diff($fecha2);
+    $dias = $diferencia->days;
 
     // Guardar en la sesión
     // Guardar en variables de sesión individuales
@@ -125,13 +75,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "horaRecogida"       => $horaRecogida,
         "horaDevolucion"     => $horaDevolucion,
         "diaRecogida"       => $fechaRecogida,
-        "diaDevolucion"     => $fechaDevolucion
+        "diaDevolucion"     => $fechaDevolucion,
+        "dias_reserva" => $dias
     ];
 
 
     $_SESSION["mensaje"] = "Datos de reserva guardados correctamente.";
 
     // Redirigir a la siguiente vista (ej: detalles del alquiler)
-    header("Location: /JOURNEY/public/index.php?vista=mostrarCoches");
+    header("Location: index.php?vista=mostrarCoches");
     exit;
 }

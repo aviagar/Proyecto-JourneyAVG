@@ -16,33 +16,33 @@
 
 <div id="menuNavegacion">
     <nav id="opcionesMenu">
-        <a href="/JOURNEY/public/index.php?vista=inicio&limpiar=1">
+        <a href="index.php?vista=inicio&limpiar=1">
             <div>
                 <h2>Inicio</h2>
             </div>
         </a>
 
-        <a href="/JOURNEY/public/index.php?vista=cochesDisponibles">
+        <a href="index.php?vista=cochesDisponibles">
             <div>
                 <h2>Coches disponibles</h2>
             </div>
         </a>
-        <a href="/JOURNEY/public/index.php?vista=sobreNosotros">
+        <a href="index.php?vista=sobreNosotros">
             <div>
                 <h2>Sobre nosotros</h2>
             </div>
         </a>
-        <a href="/JOURNEY/public/index.php?vista=serviciosJourney">
+        <a href="index.php?vista=serviciosJourney">
             <div>
                 <h2>Servicios Journey</h2>
             </div>
         </a>
-        <a href="/JOURNEY/public/index.php?vista=accesibilidad">
+        <a href="index.php?vista=accesibilidad">
             <div class="sucursal">
                 <h2>Accesibilidad</h2>
             </div>
         </a>
-        <a href="/JOURNEY/public/index.php?vista=trailerJourney">
+        <a href="index.php?vista=trailerJourney">
             <div class="sucursal">
                 <h2>Trailer Journey</h2>
             </div>
@@ -60,7 +60,7 @@
     </label>
 
     <img src="../img/Iconos/Logo.svg" alt="Journey" class="logo">
-    <a href="/JOURNEY/public/index.php?vista=perfilUsuario" id="usuarioIcono">
+    <a href="index.php?vista=perfilUsuario" id="usuarioIcono">
         <img src="../img/Iconos/Usuario.svg" alt="Usuario">
     </a>
 </header>
@@ -122,10 +122,10 @@
         <img alt="instagram" src="../img/Iconos/Instagram.svg" id="instagram" class="redes">
     </div>
     <div id="textoFooter">
-        <a href="/JOURNEY/public/index.php?vista=inicio&limpiar=1" class="enlaces" id="enseñarCookies">Ajustes de cookies</a>
-        <a href="/JOURNEY/public/index.php?vista=politicaPrivacidad" id="privacidad" class="enlaces">Política de privacidad</a>
-        <a href="/JOURNEY/public/index.php?vista=condicionesGenerales" id="condiciones" class="enlaces">Condiciones generales</a>
-        <a href="/JOURNEY/public/index.php?vista=ayuda" id="ayuda" class="enlaces">Ayuda</a>
+        <a href="index.php?vista=inicio&limpiar=1" class="enlaces" id="enseñarCookies">Ajustes de cookies</a>
+        <a href="index.php?vista=politicaPrivacidad" id="privacidad" class="enlaces">Política de privacidad</a>
+        <a href="index.php?vista=condicionesGenerales" id="condiciones" class="enlaces">Condiciones generales</a>
+        <a href="index.php?vista=ayuda" id="ayuda" class="enlaces">Ayuda</a>
         <span>© Journey 2025</span>
     </div>
 </footer>

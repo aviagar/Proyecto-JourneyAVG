@@ -73,11 +73,11 @@ function inicializarEventos() {
         const rutaActual = window.location.pathname + window.location.search;
 
         const rutasPermitidas = [
-            "/JOURNEY/public/index.php?vista=detallesAlquiler"
+            "index.php?vista=detallesAlquiler"
         ];
 
         if (window.innerWidth > 1300 && rutasPermitidas.includes(rutaActual)) {
-            window.location.href = "/JOURNEY/public/index.php?vista=inicio";
+            window.location.href = "index.php?vista=inicio";
         }
     });
 
@@ -220,7 +220,7 @@ function obtenerSedesCache() {
         return Promise.resolve(sedesCache);
     }
 
-    return fetch('http://localhost/JOURNEY/API_journey/obtenerSedes')
+    return fetch('https://yellow-wren-221467.hostingersite.com/API_journey/obtenerSedes')
         .then(response => response.json())
         .then(data => {
             if (!data.sedes || !Array.isArray(data.sedes)) return [];
@@ -240,9 +240,9 @@ function actualizarHref() {
     if (!enlace) return;
 
     if (window.innerWidth > 1300) {
-        enlace.href = "http://localhost/JOURNEY/public/index.php?vista=inicio";
+        enlace.href = "index.php?vista=inicio";
     } else {
-        enlace.href = "http://localhost/JOURNEY/public/index.php?vista=detallesAlquiler";
+        enlace.href = "index.php?vista=detallesAlquiler";
     }
 }
 

@@ -11,7 +11,7 @@
 
     <main>
         <div class="pagoFormulario" id="divSobreNosotros">
-            <span class="subrayadoNegro">Plan basico</span>
+            <span class="subrayadoNegro">Plan basico (80€)</span>
             <div class="pagoInput">
                 <p>
                     El plan básico de reserva de coche incluye el alquiler de un único vehículo con seguro básico,
@@ -25,7 +25,7 @@
                 <button type="submit" name="plan" value="basico" class="aeropuerto-b">Seleccionar plan</button>
             </form>
 
-            <span class="subrayadoNegro">Plan extra</span>
+            <span class="subrayadoNegro">Plan extra (150€)</span>
             <div class="pagoInput">
                 <p>
                     El plan extra de reserva ofrece el alquiler de un solo coche con un seguro ampliado que reduce la franquicia
@@ -39,7 +39,7 @@
                 <button type="submit" name="plan" value="extra" class="aeropuerto-b">Seleccionar plan</button>
             </form>
 
-            <span class="subrayadoNegro">Journey Swap</span>
+            <span class="subrayadoNegro">Journey Swap (300€)</span>
             <div class="pagoInput">
                 <p>
                     El plan Journey Swap es la opción premium para quienes buscan máxima flexibilidad y ventajas exclusivas.

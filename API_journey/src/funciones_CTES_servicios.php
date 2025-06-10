@@ -8,9 +8,9 @@ require 'Firebase/autoload.php';
 define("PASSWORD_API", "Una_clave_para_usar_para_encriptar");
 define("TIEMPO_MINUTOS_API", 60);
 define("SERVIDOR_BD", "localhost");
-define("USUARIO_BD", "jose");
-define("CLAVE_BD", "josefa");
-define("NOMBRE_BD", "journey_db");
+define("USUARIO_BD", "u598697057_journey");
+define("CLAVE_BD", "Journey2026");
+define("NOMBRE_BD", "u598697057_journey");
 
 
 function validateToken()
@@ -349,7 +349,7 @@ function obtenerCochesDisponibles($datos)
     $respuesta = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     $sentencia = null;
     $conexion = null;
-    
+
     if (empty($respuesta)) {
         return ["sin_coches" => "No hay coches disponibles para los criterios seleccionados"];
     }
@@ -357,7 +357,7 @@ function obtenerCochesDisponibles($datos)
     return ["coches" => $respuesta];
 }
 
-function realizarReserva($datos_insertar)
+function realizarReserva($datos_insertar, $importe)
 {
     try {
         $conexion = new PDO("mysql:host=" . SERVIDOR_BD . ";dbname=" . NOMBRE_BD, USUARIO_BD, CLAVE_BD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
@@ -370,11 +370,28 @@ function realizarReserva($datos_insertar)
         $consulta = "INSERT INTO reservas (id_usuario, id_vehiculo, fecha_inicio, fecha_fin, sede_recogida, sede_entrega, estado_reserva, plan) VALUES (?, ?, ?, ?, ?, ?, 'Pendiente', ?)";
         $sentencia = $conexion->prepare($consulta);
         $sentencia->execute($datos_insertar);
+        $id_reserva = $conexion->lastInsertId();
     } catch (PDOException $e) {
         $sentencia = null;
         $conexion = null;
         $respuesta["error"] = "No he podido realizar la reserva: " . $e->getMessage();
         return $respuesta;
+    }
+
+    try {
+        $consultaPago = "INSERT INTO pagos (id_reserva, importe, fecha_pago, metodo_pago) VALUES (?, ?, ?, ?)";
+        $sentenciaPago = $conexion->prepare($consultaPago);
+        $datosPago = [
+            $id_reserva,
+            $importe,
+            date("Y-m-d"),
+            "tarjeta"
+        ];
+        $sentenciaPago->execute($datosPago);
+        $sentenciaPago = null;
+    } catch (PDOException $e) {
+        $conexion = null;
+        return ["error" => "No he podido realizar el pago: " . $e->getMessage()];
     }
 
     try {
@@ -394,7 +411,8 @@ function realizarReserva($datos_insertar)
     return $respuesta;
 }
 
-function obtenerTodosAdmin($tabla) {
+function obtenerTodosAdmin($tabla)
+{
     $permitidas = ["reservas", "vehiculos", "sedes"];
     if (!in_array($tabla, $permitidas)) {
         return ["error" => "Tabla no válida"];
@@ -425,7 +443,8 @@ function obtenerTodosAdmin($tabla) {
     return ["datos" => $resultado];
 }
 
-function eliminarVehiculo($id_vehiculo) {
+function eliminarVehiculo($id_vehiculo)
+{
     try {
         $conexion = new PDO("mysql:host=" . SERVIDOR_BD . ";dbname=" . NOMBRE_BD, USUARIO_BD, CLAVE_BD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     } catch (PDOException $e) {
@@ -446,32 +465,166 @@ function eliminarVehiculo($id_vehiculo) {
     $sentencia = null;
     $conexion = null;
     return ["mensaje" => "Registro eliminado"];
-    
 }
 
-function obtenerReservasCliente()
+function obtenerReservasCliente($id_usuario)
 {
     try {
         $conexion = new PDO("mysql:host=" . SERVIDOR_BD . ";dbname=" . NOMBRE_BD, USUARIO_BD, CLAVE_BD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     } catch (PDOException $e) {
-        $respuesta["error"] = "No he podido conectarse a la base de batos: " . $e->getMessage();
-        return $respuesta;
+        return ["error" => "No he podido conectarme a la base de datos: " . $e->getMessage()];
     }
 
     try {
-
-        $consulta = "SELECT * from sedes";
+        $consulta = "SELECT r.*, s1.nombre_sede AS nombre_sede_recogida, s2.nombre_sede AS nombre_sede_entrega FROM reservas r JOIN sedes s1 ON r.sede_recogida = s1.id_sede JOIN sedes s2 ON r.sede_entrega = s2.id_sede WHERE r.id_usuario = ?";
         $sentencia = $conexion->prepare($consulta);
-        $sentencia->execute();
+        $sentencia->execute([$id_usuario]);
+    } catch (PDOException $e) {
+        return ["error" => "No he podido realizar la consulta: " . $e->getMessage()];
+    }
+
+    $reservas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $sentencia = null;
+    $conexion = null;
+    return ["reservas_usuario" => $reservas];
+}
+
+
+function actualizarReserva($datos)
+{
+    try {
+        $conexion = new PDO("mysql:host=" . SERVIDOR_BD . ";dbname=" . NOMBRE_BD, USUARIO_BD, CLAVE_BD, [
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"
+        ]);
+    } catch (PDOException $e) {
+        return ["error" => "No se pudo conectar a la base de datos: " . $e->getMessage()];
+    }
+
+    try {
+        $consulta = "UPDATE reservas SET fecha_inicio = ?, fecha_fin = ?, sede_recogida = ?, sede_entrega = ?,  estado_reserva = 'Pendiente' WHERE id_reserva = ?";
+
+        $sentencia = $conexion->prepare($consulta);
+
+        $sentencia->execute([
+            $datos[1],
+            $datos[2],
+            $datos[3],
+            $datos[4],
+            $datos[0]
+        ]);
+
+        if ($sentencia->rowCount() > 0) {
+            return ["success" => "Reserva actualizada correctamente."];
+        } else {
+            return ["error" => "No se pudo actualizar la reserva o no existe."];
+        }
+    } catch (PDOException $e) {
+        return ["error" => "Error en la consulta: " . $e->getMessage()];
+    } finally {
+        $sentencia = null;
+        $conexion = null;
+    }
+}
+
+function actualizarUsuario($datos)
+{
+    try {
+        $conexion = new PDO("mysql:host=" . SERVIDOR_BD . ";dbname=" . NOMBRE_BD, USUARIO_BD, CLAVE_BD, [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]);
+    } catch (PDOException $e) {
+        return ["error" => "No se pudo conectar a la base de datos: " . $e->getMessage()];
+    }
+
+    try {
+        $consulta = "UPDATE usuarios SET nombre = ?, email = ?, telefono = ?, usuario = ? WHERE id_usuario = ?";
+
+        $sentencia = $conexion->prepare($consulta);
+
+        $sentencia->execute([
+            $datos['nombre'],
+            $datos['email'],
+            $datos['telefono'],
+            $datos['usuario'],
+            $datos['id_usuario']
+        ]);
+
+
+        if ($sentencia->rowCount() > 0) {
+            return ["success" => "Usuario actualizado correctamente."];
+        } else {
+            return ["error" => "No se pudo actualizar el usuario o no existe."];
+        }
+    } catch (PDOException $e) {
+        return ["error" => "Error en la consulta: " . $e->getMessage()];
+    } finally {
+        $sentencia = null;
+        $conexion = null;
+    }
+}
+
+
+function editarVehiculo($datos)
+{
+    try {
+        $conexion = new PDO("mysql:host=" . SERVIDOR_BD . ";dbname=" . NOMBRE_BD, USUARIO_BD, CLAVE_BD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    } catch (PDOException $e) {
+        return ["error" => "No se pudo conectar a la base de datos: " . $e->getMessage()];
+    }
+
+    try {
+        $consulta = "UPDATE vehiculos SET marca = ?, modelo = ?, matricula = ?, estado = ?, sede_actual = ?, plazas = ?, transmision = ?, descripcion = ?, combustible = ? WHERE id_vehiculo = ?";
+        $sentencia = $conexion->prepare($consulta);
+        $sentencia->execute([
+            $datos["marca"],
+            $datos["modelo"],
+            $datos["matricula"],
+            $datos["estado"],
+            $datos["sede_actual"],
+            $datos["plazas"],
+            $datos["transmision"],
+            $datos["descripcion"],
+            $datos["combustible"],
+            $datos["id_vehiculo"]
+        ]);
     } catch (PDOException $e) {
         $sentencia = null;
         $conexion = null;
-        $respuesta["error"] = "No he podido realizarse la consulta: " . $e->getMessage();
-        return $respuesta;
+        return ["error" => "No se pudo realizar la actualización: " . $e->getMessage()];
     }
 
-    $respuesta["sedes"] = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     $sentencia = null;
     $conexion = null;
-    return $respuesta;
+    return ["mensaje" => "Vehículo actualizado correctamente"];
+}
+
+function insertarVehiculo($datos)
+{
+    try {
+        $conexion = new PDO("mysql:host=" . SERVIDOR_BD . ";dbname=" . NOMBRE_BD, USUARIO_BD, CLAVE_BD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    } catch (PDOException $e) {
+        return ["error" => "No se pudo conectar a la base de datos: " . $e->getMessage()];
+    }
+
+    try {
+        $consulta = "INSERT INTO vehiculos (marca, modelo, matricula, estado, sede_actual, plazas, transmision, descripcion, combustible) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sentencia = $conexion->prepare($consulta);
+        $sentencia->execute([
+            $datos["marca"],
+            $datos["modelo"],
+            $datos["matricula"],
+            $datos["estado"],
+            $datos["sede_actual"],
+            $datos["plazas"],
+            $datos["transmision"],
+            $datos["descripcion"],
+            $datos["combustible"]
+        ]);
+        $idInsertado = $conexion->lastInsertId();
+    } catch (PDOException $e) {
+        return ["error" => "No se pudo ejecutar la consulta: " . $e->getMessage()];
+    }
+
+    $sentencia = null;
+    $conexion = null;
+
+    return ["mensaje" => "Vehículo insertado", "id_vehiculo" => $idInsertado];
 }

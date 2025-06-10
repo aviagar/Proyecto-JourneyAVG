@@ -6,10 +6,11 @@ require_once "funciones_CTES.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_coche = $_POST["id_coche"] ?? null;
+    $precio_coche = $_POST["precio_coche"] ?? null;
 
     if (!$id_coche) {
         $_SESSION["error"] = "No se ha especificado ningún coche";
-        header("Location: /JOURNEY/public/index.php?vista=cochesDisponibles");
+        header("Location: index.php?vista=cochesDisponibles");
         exit;
     }
 
@@ -38,10 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($json_resp["error"])) {
         $_SESSION["error"] = "Error al seleccionar el coche: " . $json_resp["error"];
-        header("Location: /JOURNEY/public/index.php?vista=mostrarCoches");
+        header("Location: index.php?vista=mostrarCoches");
     } else {
         $_SESSION["coche_seleccionado"] = $id_coche;
-        header("Location: /JOURNEY/public/index.php?vista=elegirPlan");
+        $_SESSION["periodo_reserva"]["total_reserva"] = $precio_coche * $_SESSION["periodo_reserva"]["dias_reserva"];
+        header("Location: index.php?vista=elegirPlan");
         exit;
     }
 
