@@ -1,0 +1,1036 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.subtitulo {
+    font-size: 14px;
+    color: #5f5f5f;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#contenedor {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 2rem;
+}
+
+
+#cabecera {
+    background-color: black;
+    display: flex;
+    padding: 0 2rem;
+    height: 5rem;
+    align-items: center;
+}
+
+
+/* ESTILOS MENU NAVEGACION */
+
+#cabeceraMenu {
+    display: flex;
+    padding: 0 2rem;
+    align-items: center;
+}
+
+#menuNavegacion {
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+}
+
+#menuNavegacion.mostrar {
+    display: flex;
+}
+
+#menuNavegacion .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1001;
+}
+
+#menuNavegacion #opcionesMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    overflow-y: auto;
+    padding-bottom: 3rem;
+}
+
+
+@media (min-width: 1301px) {
+    #menuNavegacion {
+        position: static;
+        display: flex !important;
+        width: auto;
+        height: auto;
+    }
+
+    #menuHamburguesa {
+        display: none !important;
+    }
+
+    #menuNavegacion #opcionesMenu {
+        flex-direction: row;
+        gap: 2rem;
+        padding-bottom: 0;
+    }
+}
+
+
+/* ESTILOS PAGINA PRINCIPAL */
+
+#menuHamburguesa {
+    width: 24px;
+    height: 24px;
+}
+
+.logo {
+    padding-top: 0.75rem;
+    margin-left: 1rem;
+}
+
+#usuarioIcono {
+    margin-left: auto;
+}
+
+#buscadorFechasLugaresMovil {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    top: 5rem;
+}
+
+#buscadorFechasLugares {
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    top: 5rem;
+    display: none;
+}
+
+#portada {
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../img/Imagenes/Portada.webp");
+    position: relative;
+}
+
+#rectanguloBuscarCiudadMovil {
+    background-color: #fff;
+    width: 80%;
+    border-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+#rectanguloBuscarCiudad {
+    background-color: #fff;
+    width: 80%;
+    border-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.aeropuerto-b {
+    background-color: orange;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    border-radius: 7px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    width: 100%;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    /* padding-bottom: 0.6rem; */
+    gap: 0.7rem;
+    width: 100%;
+}
+
+.gris {
+    color: gray;
+}
+
+.aeropuerto {
+    flex: 1;
+    font-size: 14px;
+    padding: 0.8rem 0.8rem 0.8rem 0;
+    border-bottom: 1px solid lightgrey;
+}
+
+#seccion1 {
+    margin-top: -0.25rem;
+    background: linear-gradient(to bottom, #FFBA2F, #CC9526, #99701C);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-bottom: 2vh;
+}
+
+.titulos {
+    font-family: 'Source Sans Pro', sans-serif;
+    flex-basis: 60%;
+    text-align: center;
+}
+
+#lineaNegra {
+    flex-basis: 60%;
+    border-bottom: 1px solid black;
+}
+
+#lineas {
+    display: flex;
+    justify-content: center;
+    flex-basis: 100%;
+    align-items: center;
+}
+
+#lineas>span {
+    margin-left: 0.75rem;
+}
+
+.lineaBlanca {
+    width: 3rem;
+    border-bottom: 1px solid white;
+    margin-left: 10px;
+}
+
+.lineaGris {
+    width: 3rem;
+    border-bottom: 1px solid lightgrey;
+    margin-left: 10px;
+    flex-basis: 45%;
+}
+
+#textoAlquiler {
+    background-color: white;
+    flex-basis: 80%;
+    padding: 5%;
+    border-radius: 25px;
+    text-align: justify;
+}
+
+#f100 {
+    flex-basis: 100%;
+}
+
+#iconosFooter {
+    display: flex;
+    padding-right: 2vh;
+    width: 100%;
+
+}
+
+#facebook {
+    margin-left: auto;
+}
+
+.redes {
+    margin-left: 1vh;
+}
+
+#textoFooter {
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.enlaces {
+    border-bottom: 1px solid white;
+    flex-basis: 40%;
+    margin: 3%;
+    color: white;
+}
+
+input {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+/* ESTILOS LUGAR DE RECOGIDA */
+
+.header {
+    display: flex;
+    align-items: center;
+    padding-top: 1%;
+    margin-top: 6rem;
+}
+
+.titulo {
+    flex-grow: 0.95;
+    display: flex;
+    justify-content: center;
+}
+
+.barraBusqueda,
+.ubicacion {
+    display: flex;
+    border-radius: 25px;
+    flex-basis: 100%;
+    padding: 1.5%;
+    margin: 2%;
+}
+
+.contGoogleApple {
+    display: flex;
+    flex-basis: 80%;
+    padding: 3%;
+    margin: 2%;
+    border: 1px solid black;
+    margin: 2rem;
+}
+
+.contGoogleApple span {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.barraBusqueda {
+    border: 1px solid #CC9526;
+}
+
+.ubicacion {
+    border: 1px solid black;
+}
+
+
+#sucursales {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    gap: 4rem;
+    margin: 2rem 1rem 23rem;
+    flex-basis: 100%;
+}
+
+#sucursales>a {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    margin-left: 1rem;
+    gap: 4rem;
+}
+
+.sucursal {
+    display: flex;
+    align-items: center;
+}
+
+
+.inputWrapper {
+    position: relative;
+    flex: 1;
+    /* para que crezca dentro del contenedor flex */
+}
+
+#ubicacionDevolucion {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#ubicacion {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+#sugerenciasSucursal {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ESTILOS DETALLES DE SU ALQUILER */
+
+#flatpickrCalendar {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    width: 0;
+    border: none;
+}
+
+#aLugar {
+    margin-bottom: 2rem;
+}
+
+.linea {
+    width: 100%;
+    height: 1px;
+    background-color: #d3d3d3;
+}
+
+
+#recogida-devolucion {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+#recogida-devolucion>a {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+
+}
+
+#recogida-devolucion>span {
+    flex-basis: 40%;
+    margin: 5%;
+    margin-bottom: 0;
+}
+
+#mainDetalles {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    max-width: 1300px;
+    width: 100%;
+}
+
+#recogidaCuadro,
+#devolucionCuadro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #d3d3d3;
+    border-radius: 15px;
+    flex-basis: 40%;
+    margin: 5%;
+    margin-bottom: 8%;
+    padding: 2.5%;
+}
+
+#recogidaCuadroInicio,
+#devolucionCuadroInicio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #d3d3d3;
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+#recogidaCuadro div,
+#devolucionCuadro div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.botonConfirmar {
+    background-color: #FFBA2F;
+    border-radius: 20px;
+    flex-basis: 80%;
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1rem;
+    color: white;
+}
+
+.botonConfirmarCuadrado {
+    background-color: #FFBA2F;
+    flex-basis: 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 3rem;
+    padding: 1rem;
+    color: white;
+}
+
+/* ESTILOS MOSTRAR COCHES MISMA RECOGIDA */
+
+.volverDetalles {
+    background-color: lightgrey;
+    width: 385px;
+    border-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+.volverDetalles>span {
+    flex-basis: 100%;
+}
+
+#editar {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+}
+
+#coches {
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+.coche {
+    width: 385px;
+    height: 385px;
+}
+
+div#coches>button {
+    border: none;
+    background: none;
+}
+
+
+/* ESTILOS CALENDARIO */
+
+.calendario {
+    width: 300px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.calendario .headerCalendario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.calendario .headerCalendario .arrow {
+    cursor: default;
+    color: #bbb;
+}
+
+.calendario .dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+
+.calendario .dias .dia {
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+}
+
+.calendario .numeros {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+
+.calendario .numeros div {
+    padding: 10px;
+    border-radius: 50%;
+    background: #fff;
+    font-size: 14px;
+    color: #333;
+}
+
+.calendario .numeros div.hoy {
+    background: #ff5722;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+/* ESTILOS FECHAS DEL VIAJE */
+
+.contenedorCentrado {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.horaViaje {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.horaViaje label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.horaViaje>div {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    width: 200px;
+}
+
+.formFechas {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+
+/* ESTILOS PAGO */
+
+.pagoFormulario {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.pagoTitulo {
+
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.pagoInput {
+    border: 2px solid #FFC107;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+#confirmacionInput {
+    margin: 5rem;
+    padding: 1.5rem;
+}
+
+.cerrar {
+    border: 2px solid red;
+    color: red;
+}
+
+.pagoFila {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+
+.pagoFormulario input {
+    margin-bottom: 15px;
+}
+
+.pagoTotal {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+
+button.botonConfirmar,
+button.botonConfirmarCuadrado {
+    border: none;
+}
+
+
+/* ESTILOS REGISTRO / LOGIN */
+
+.subrayadoNegro {
+    border-bottom: 1px solid black;
+}
+
+.contenedorInputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+
+}
+
+.inputRegistro {
+    padding: 10px;
+    font-size: 16px;
+    color: black;
+    border-bottom: 1px solid lightgrey;
+}
+
+#iconoSesIniciada {
+    width: 6rem;
+
+}
+
+#logoNegro {
+    margin-left: 2rem;
+}
+
+#divAyuda>* {
+    margin: 1.5rem;
+}
+
+#divSobreNosotros>* {
+    margin: 1rem;
+}
+
+#divPolitica {
+    padding: 2rem;
+}
+
+#cerrarMenu {
+    width: 30px;
+    height: 30px;
+}
+
+#lightSlider {
+    display: block;
+    text-align: center;
+}
+
+#seccion1>img {
+    display: none;
+}
+
+label.menu-toggle {
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    border-radius: 0.2rem;
+}
+
+label.menu-toggle > span {
+    position: absolute;
+    background: white;
+    width: 1.5rem;
+    height: 0.2rem;
+    border-radius: 0.2rem;
+    transition: all 0.3s ease;
+}
+
+label.menu-toggle span:nth-child(1) {
+    top: 0;
+}
+
+label.menu-toggle span:nth-child(2) {
+    top: 0.6rem;
+}
+
+label.menu-toggle span:nth-child(3) {
+    bottom: 0;
+}
+
+label.menu-toggle.activo > span:nth-child(1) {
+    top: 0.6rem;
+    transform: rotate(45deg);
+    transition-delay: 0s, .025s;
+}
+
+label.menu-toggle.activo > span:nth-child(2) {
+    background: none;
+}
+
+label.menu-toggle.activo > span:nth-child(3) {
+    top: 0.6rem;
+    transform: rotate(-45deg);
+    transition-delay: 0s, .025s;
+}
+
+
+.campoInvalido {
+    border: 2px solid red;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.negrita {
+    font-weight: bold;
+}
+
+.enlace {
+    color: blue;
+    text-decoration: underline;
+}
+
+#menuNavegacion {
+    padding-top: 1rem;
+}
+
+#contenedorFijo {
+    width: 70%;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.buscadorSedesDetalles {
+    margin: 1rem;
+    border: 1px solid black;
+    padding: 1rem;
+    border-radius: 20px;
+}
+
+#divObjetivos{
+    padding: 2rem;
+}
+
+.contenedor_not_found{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.contenedor_not_found *{
+    flex-basis: 100%;
+    text-align: center;
+}
+
+.not_found{
+    width: 20rem;
+    height: 20rem;
+}
+
+/* VERSION ESCRITORIO */
+
+@media (min-width: 1024px) {
+    #portada {
+        height: 551px;
+        background-image: url("../img/Imagenes/PortadaEscritorio.webp");
+    }
+
+    #rectanguloBuscarCiudad {
+        width: 70%;
+    }
+
+
+
+    #textoReserva {
+        width: 60%;
+    }
+
+    .titulos {
+        font-family: 'Source Sans Pro', sans-serif;
+        flex-basis: 100%;
+        text-align: center;
+    }
+
+    #seccion1 p {
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+@media (min-width: 1300px) {
+
+    #buscadorFechasLugaresMovil {
+        display: none;
+    }
+
+    #buscadorFechasLugares {
+        display: flex;
+    }
+
+    #lightSlider {
+        display: none;
+    }
+
+    #seccion1>img {
+        display: block;
+    }
+
+    .lSPager {
+        display: none;
+    }
+
+    #cabecera {
+        flex-direction: row-reverse;
+    }
+
+    #menuHamburguesa {
+        display: none;
+    }
+
+    #menuNavegacion {
+        top: 2rem;
+        left: 1rem;
+        height: auto;
+        background-color: transparent;
+        max-width: 80%;
+        position: absolute;
+        padding-top: 0;
+    }
+
+    #opcionesMenu a {
+        color: white;
+    }
+
+    #menuNavegacion #opcionesMenu {
+        flex-direction: row;
+    }
+
+    #opcionesMenu a h2 {
+        font-size: 15px;
+        font-weight: normal;
+    }
+
+    #coches {
+        display: grid;
+        place-items: center;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+/*coches dinamicos*/
+
+div#coches {
+    align-items: center;
+}
+
+button.coche {
+    height: 385px;
+    width: 385px;
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    align-items: center;
+
+    img.coche {
+
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    div.car-info-wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        padding: 2rem;
+        align-items: flex-start;
+        gap: 1rem;
+
+        div.car-info-main {
+            display: flex;
+            width: 100%;
+            gap: 0rem;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+
+            h3 {
+                font-size: x-large;
+            }
+
+            p {
+                color: black;
+                padding: 0.4rem 1.5rem;
+                background-color: white;
+                text-transform: capitalize;
+                border-radius: 15px;
+                font-weight: bold;
+            }
+        }
+
+        .car-info-desc {
+            color: white;
+            font-size: 0.85rem;
+        }
+
+        .car-info-secundary {
+
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1rem;
+
+            p {
+
+                padding: 0.2rem 1.5rem;
+                border-radius: 15px;
+                background-color: white;
+                text-transform: capitalize;
+            }
+        }
+
+    }
+
+}
