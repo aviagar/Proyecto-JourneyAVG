@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         !$pais || !$codigo_postal || !$direccion || !$ciudad || !$provincia
     ) {
         $_SESSION["error"] = "Faltan datos del formulario.";
-        header("Location: index.php?vista=pago");
+        header("Location: /index.php?vista=pago");
         exit;
     }
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     ) {
         $_SESSION["error"] = "Faltan datos de la reserva en la sesión.";
-        header("Location: index.php?vista=inicio");
+        header("Location: /index.php?vista=inicio");
         exit;
     }
 
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$json_reserva || isset($json_reserva["error"])) {
         $_SESSION["error"] = $json_reserva["error"] ?? "Error al procesar la reserva.";
-        header("Location: index.php?vista=pago");
+        header("Location: /index.php?vista=pago");
         exit;
     }
 
@@ -75,9 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     unset($_SESSION["periodo_reserva"]);
     unset($_SESSION["coche_seleccionado"]);
 
-    header("Location: index.php?vista=confirmaReserva");
+    header("Location: /index.php?vista=confirmaReserva");
     exit;
 } else {
-    header("Location: index.php?vista=pago");
+    header("Location: /index.php?vista=pago");
     exit;
 }

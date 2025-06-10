@@ -14,10 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['plan'])) {
     }
 
     if (isset($_SESSION["token"])) {
-            header("Location: index.php?vista=pago");
+            header("Location: /index.php?vista=pago");
             exit;
         } else {
-            header("Location: index.php?vista=perfilUsuario");
+            header("Location: /index.php?vista=perfilUsuario");
             exit;
         }
 }

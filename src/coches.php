@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$id_coche) {
         $_SESSION["error"] = "No se ha especificado ningún coche";
-        header("Location: index.php?vista=cochesDisponibles");
+        header("Location: /index.php?vista=cochesDisponibles");
         exit;
     }
 
@@ -39,11 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($json_resp["error"])) {
         $_SESSION["error"] = "Error al seleccionar el coche: " . $json_resp["error"];
-        header("Location: index.php?vista=mostrarCoches");
+        header("Location: /index.php?vista=mostrarCoches");
     } else {
         $_SESSION["coche_seleccionado"] = $id_coche;
         $_SESSION["periodo_reserva"]["total_reserva"] = $precio_coche * $_SESSION["periodo_reserva"]["dias_reserva"];
-        header("Location: index.php?vista=elegirPlan");
+        header("Location: /index.php?vista=elegirPlan");
         exit;
     }
 

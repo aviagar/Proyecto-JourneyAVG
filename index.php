@@ -26,7 +26,7 @@ if ($mostrarHeaderFooter) {
 // Cierre de sesión 
 if (isset($_POST["btnCerrarSession"])) {
     session_destroy();
-    header("Location: index.php");
+    header("Location: /index.php");
     exit;
 }
 
@@ -46,7 +46,7 @@ if ((isset($_GET['limpiar']) && $_GET['limpiar'] == '1') || isset($_POST['btnSal
     unset($_SESSION['periodo_reserva']);
     unset($_SESSION['coche_seleccionado']);
 
-    header("Location: index.php?vista=inicio");
+    header("Location: /index.php?vista=inicio");
     exit;
 }
 
@@ -60,7 +60,7 @@ switch ($vista) {
             require "vistas/vistaAdmin.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -81,7 +81,7 @@ switch ($vista) {
             require "vistas/confirmaReserva.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -90,7 +90,7 @@ switch ($vista) {
             require "vistas/detallesAlquiler.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -103,7 +103,7 @@ switch ($vista) {
             require "vistas/mostrarCoches.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -112,7 +112,7 @@ switch ($vista) {
             require "vistas/pago.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -120,7 +120,7 @@ switch ($vista) {
         if (isset($_SESSION["token"])) {
             require "vistas/perfilUsuario.php";
         } else {
-            header("Location: index.php?vista=inicioSesion");
+            header("Location: /index.php?vista=inicioSesion");
             exit;
         }
         break;
@@ -142,7 +142,7 @@ switch ($vista) {
             require "vistas/vistaInicioSesion.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -151,7 +151,7 @@ switch ($vista) {
             require "vistas/vistaRegistro.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -160,7 +160,7 @@ switch ($vista) {
             require "vistas/elegirPlan.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -169,7 +169,7 @@ switch ($vista) {
             require "vistas/vistaReservas.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -178,7 +178,7 @@ switch ($vista) {
             require "vistas/vistaActualizarReserva.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -191,7 +191,7 @@ switch ($vista) {
             require "vistas/vistaEditarUsuario.php";
             break;
         } else {
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 

@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'horaDevolucion' => $horaDevolucion
         ];
 
-        header("Location: index.php?vista=vistaActualizarReserva");
+        header("Location: /index.php?vista=vistaActualizarReserva");
         exit;
     }
 
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $respuesta = consumir_servicios_REST(DIR_SERV . "/obtenerSedes", "GET");
         if (isset($respuesta["error"])) {
             $_SESSION["error"] = "Error al obtener sedes: " . $respuesta["error"];
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!$idDevolucion) {
                 $_SESSION["error_devolucion"] = "No se encontró la sede de devolución especificada.";
             }
-            header("Location: index.php?vista=vistaActualizarReserva");
+            header("Location: /index.php?vista=vistaActualizarReserva");
             exit;
         }
     } else {
@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'diaDevolucion' => $fechaDevolucion,
             'horaDevolucion' => $horaDevolucion
         ];
-        header("Location: index.php?vista=vistaActualizarReserva");
+        header("Location: /index.php?vista=vistaActualizarReserva");
         exit;
     }
 
@@ -141,11 +141,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$json_respuesta || isset($json_respuesta["error"])) {
         $_SESSION["error"] = $json_respuesta["error"] ?? "Error al actualizar la reserva.";
-        header("Location: index.php?vista=vistaActualizarReserva");
+        header("Location: /index.php?vista=vistaActualizarReserva");
         exit;
     }
 
     // Éxito
-    header("Location: index.php?vista=confirmaActualizarReserva");
+    header("Location: /index.php?vista=confirmaActualizarReserva");
     exit;
 }

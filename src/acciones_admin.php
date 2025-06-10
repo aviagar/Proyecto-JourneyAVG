@@ -93,5 +93,5 @@ switch ($accion) {
 }
 
 // Redirige de nuevo al panel admin
-header("Location: index.php?vista=vistaAdmin");
+header("Location: /index.php?vista=vistaAdmin");
 exit;

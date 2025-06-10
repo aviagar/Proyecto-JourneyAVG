@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'email' => $email
         ];
 
-        header("Location: index.php?vista=vistaEditarUsuario");
+        header("Location: /index.php?vista=vistaEditarUsuario");
         exit;
     }
 
@@ -66,23 +66,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$json_actualizar || isset($json_actualizar["error"])) {
             $_SESSION['error'] = $json_actualizar["error"] ?? "Error en el registro";
-            header("Location: index.php?vista=vistaEditarUsuario");
+            header("Location: /index.php?vista=vistaEditarUsuario");
             exit;
         }
 
         if (isset($json_actualizar["mensaje"])) {
             $_SESSION['mensaje'] = $json_actualizar["mensaje"];
-            header("Location: index.php?vista=perfilUsuario");
+            header("Location: /index.php?vista=perfilUsuario");
             exit;
         }
 
         // Por si acaso
         $_SESSION['error'] = "No se pudo completar el registro";
-        header("Location: index.php?vista=registro");
+        header("Location: /index.php?vista=registro");
         exit;
     } else {
         $_SESSION['clave_incorrecta'] = "La contraseña es incorrecta";
-        header("Location: index.php?vista=vistaEditarUsuario");
+        header("Location: /index.php?vista=vistaEditarUsuario");
         exit;
     }
 }

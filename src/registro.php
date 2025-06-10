@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'email' => $email
         ];
 
-        header("Location: index.php?vista=registro");
+        header("Location: /index.php?vista=registro");
         exit;
     }
 
@@ -63,24 +63,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$json_registro || isset($json_registro["error"])) {
         $_SESSION['error'] = $json_registro["error"] ?? "Error en el registro";
-        header("Location: index.php?vista=registro");
+        header("Location: /index.php?vista=registro");
         exit;
     }
 
     if (isset($json_registro["usuario_existente"])) {
         $_SESSION['error'] = $json_registro["usuario_existente"];
-        header("Location: index.php?vista=registro");
+        header("Location: /index.php?vista=registro");
         exit;
     }
 
     if (isset($json_registro["mensaje"])) {
         $_SESSION['mensaje'] = $json_registro["mensaje"];
-        header("Location: index.php?vista=inicioSesion");
+        header("Location: /index.php?vista=inicioSesion");
         exit;
     }
 
     // Por si acaso
     $_SESSION['error'] = "No se pudo completar el registro";
-    header("Location: index.php?vista=registro");
+    header("Location: /index.php?vista=registro");
     exit;
 }

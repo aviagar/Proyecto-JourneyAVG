@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $respuesta = consumir_servicios_REST(DIR_SERV . "/obtenerSedes", "GET");
         if (isset($respuesta["error"])) {
             $_SESSION["error"] = "Error al obtener sedes: " . $respuesta["error"];
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
 
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!$idDevolucion) {
                 $_SESSION["error_devolucion"] = "No se encontró la sede de devolución especificada.";
             }
-            header("Location: index.php?vista=inicio");
+            header("Location: /index.php?vista=inicio");
             exit;
         }
     } else {
@@ -83,6 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION["mensaje"] = "Datos de reserva guardados correctamente.";
 
     // Redirigir a la siguiente vista (ej: detalles del alquiler)
-    header("Location: index.php?vista=mostrarCoches");
+    header("Location: /index.php?vista=mostrarCoches");
     exit;
 }
