@@ -1,7 +1,6 @@
 <?php
 session_name("Journey");
 session_start();
-file_put_contents("debug_sesion_vista.txt", print_r($_SESSION, true));
 
 
 require_once "funciones_CTES.php";
