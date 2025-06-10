@@ -23,7 +23,6 @@ $mostrarHeaderFooter = !in_array($vista, $vistas_sin_header_footer);
 if ($mostrarHeaderFooter) {
     include __DIR__ . "/components/header.php";
 }
-var_dump($_SESSION);
 // Cierre de sesión 
 if (isset($_POST["btnCerrarSession"])) {
     session_destroy();
